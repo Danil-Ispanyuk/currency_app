@@ -33,7 +33,7 @@ export const Home: FC = (): JSX.Element => {
         } else {
             return () => {};
         }
-    }, [currencyData]);
+    }, [currencyData, refetch]);
 
     return (
         <HomeLayout onUpdate={handleCurrencyUpdate}>
