@@ -5,8 +5,8 @@ import { ExchangeVariant } from "../../../../types/exchange.type";
 import { ICurrencyData } from "../../../../types/currency.type";
 
 export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data }): JSX.Element => {
-    const [currencyGetUnit, setCurrencyGetUnit] = useState<string>(" ");
-    const [currencyChangeUnit, setCurrencyChangeUnit] = useState<string>(" ");
+    const [currencyGetUnit, setCurrencyGetUnit] = useState<string>("");
+    const [currencyChangeUnit, setCurrencyChangeUnit] = useState<string>("");
     const [currencyChangeValue, setCurrencyChangeValue] = useState<string | number>(0);
     const [currencyValue, setCurrencyValue] = useState<string | number>("");
 
@@ -62,6 +62,7 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
                     dropdownOnChange={handleChooseChangeUnit}
                     variant={ExchangeVariant.CHANGE}
                     testid={"exchanged-change"}
+                    dropdownPlaceholder={"UAH"}
                 />
                 <Styled.ChangeIcon data-testid="change-button" onClick={handleExchange} />
                 <ExchangeField
@@ -78,6 +79,7 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
                     readonly={true}
                     variant={ExchangeVariant.GET}
                     testid={"exchanged-get"}
+                    dropdownPlaceholder={"USD"}
                 />
             </Styled.ExchangeContent>
         </Styled.ExchangeContainer>

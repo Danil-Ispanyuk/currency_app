@@ -6,6 +6,7 @@ interface IProps {
     options: string[] | undefined;
     value: string;
     onChange: (option: string) => void;
+    placeholder?: string;
     config?: {
         width: string;
         height: string;
@@ -15,6 +16,7 @@ interface IProps {
 export const DropDown: FC<IProps> = ({
     options,
     value,
+    placeholder = " ",
     onChange,
     config = {
         width: "100%",
@@ -37,8 +39,13 @@ export const DropDown: FC<IProps> = ({
 
     return (
         <Styled.Container ref={ref} data-testid="dropdown__container">
-            <Styled.DropdownArea data-testid="dropdown__content" config={config} onClick={toogleOpen}>
-                {value}
+            <Styled.DropdownArea
+                isPlaceholder={!value}
+                data-testid="dropdown__content"
+                config={config}
+                onClick={toogleOpen}
+            >
+                {value ? value : placeholder}
             </Styled.DropdownArea>
             {open ? (
                 <Styled.Options data-testid="dropdown__options">

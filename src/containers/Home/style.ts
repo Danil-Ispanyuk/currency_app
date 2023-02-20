@@ -49,6 +49,7 @@ export const InputContainer = styled.div`
 export const ChangeIcon = styled(IconChange)`
     width: 30px;
     margin: 0 10px;
+    margin-top: 30px;
     cursor: pointer;
 
     @media (max-width: 985px) {

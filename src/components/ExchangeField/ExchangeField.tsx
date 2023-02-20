@@ -21,6 +21,7 @@ interface IProps {
         height: string;
     };
     testid?: string;
+    dropdownPlaceholder?: string;
 }
 
 export function ExchangeField({
@@ -30,6 +31,7 @@ export function ExchangeField({
     dropdownValue,
     dropdownOnChange,
     dropdownConfig,
+    dropdownPlaceholder,
     variant,
     data = [],
     readonly,
@@ -72,7 +74,7 @@ export function ExchangeField({
     return (
         <Styled.Container data-testid={testid}>
             <Input
-                maxWidth={"250px"}
+                maxWidth={"200px"}
                 label={label}
                 value={value}
                 onChange={onChange}
@@ -84,7 +86,13 @@ export function ExchangeField({
                 testId={"exchanged-input"}
             />
             <Styled.DropdownContainer>
-                <DropDown value={dropdownValue} onChange={dropdownOnChange} options={options} config={dropdownConfig} />
+                <DropDown
+                    placeholder={dropdownPlaceholder}
+                    value={dropdownValue}
+                    onChange={dropdownOnChange}
+                    options={options}
+                    config={dropdownConfig}
+                />
             </Styled.DropdownContainer>
         </Styled.Container>
     );
