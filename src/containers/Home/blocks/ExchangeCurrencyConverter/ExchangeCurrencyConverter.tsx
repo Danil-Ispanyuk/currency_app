@@ -30,7 +30,7 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
     };
 
     useEffect(() => {
-        if (!data) return;
+        if (!data || !currencyGetUnit) return;
         const element = data.find(
             (item: any) => item.pair.includes(currencyChangeUnit) && item.pair.includes(currencyGetUnit)
         );
