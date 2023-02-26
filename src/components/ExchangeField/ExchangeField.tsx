@@ -68,8 +68,7 @@ export function ExchangeField({
                 return dropdownOnChange(options[0]);
             }
         }
-        // eslint-disable-next-line
-    }, [currencyChangeUnit, options, dropdownValue]);
+    }, [dropdownOnChange, currencyChangeUnit, options, dropdownValue]);
 
     return (
         <Styled.Container data-testid={testid}>

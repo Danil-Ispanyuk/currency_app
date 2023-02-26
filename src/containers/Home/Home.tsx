@@ -15,7 +15,7 @@ export const Home: FC = (): JSX.Element => {
     } = useGetCurrencyQuery(undefined, {
         skip: Number(localStorage.getItem("counter")) >= 5
     });
-    const [exchangeData, setExchangeData] = useState<ICurrencyData[] | undefined>();
+    const [exchangeData, setExchangeData] = useState<ICurrencyData[] | []>( currencyData || [] );
 
     useEffect(() => {
         if (currencyData) {
@@ -49,10 +49,10 @@ export const Home: FC = (): JSX.Element => {
                 <Fragment>
                     <ExchangeTable
                         initialData={currencyData}
-                        data={exchangeData || []}
+                        currencies={exchangeData}
                         onChange={handleTableExchangeDataChange}
                     />
-                    <ExchangeCurrencyConverter data={exchangeData || []} />
+                    <ExchangeCurrencyConverter currencies={exchangeData || []} />
                 </Fragment>
             )}
         </HomeLayout>

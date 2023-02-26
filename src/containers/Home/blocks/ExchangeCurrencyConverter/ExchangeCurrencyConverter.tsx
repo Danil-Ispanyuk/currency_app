@@ -4,7 +4,7 @@ import { ExchangeField } from "../../../../components";
 import { ExchangeVariant } from "../../../../types/exchange.type";
 import { ICurrencyData } from "../../../../types/currency.type";
 
-export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data }): JSX.Element => {
+export const ExchangeCurrencyConverter: FC<{ currencies: ICurrencyData[] }> = ({ currencies }): JSX.Element => {
     const [currencyGetUnit, setCurrencyGetUnit] = useState<string>("");
     const [currencyChangeUnit, setCurrencyChangeUnit] = useState<string>("");
     const [currencyChangeValue, setCurrencyChangeValue] = useState<string | number>(0);
@@ -30,21 +30,21 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
     };
 
     useEffect(() => {
-        if (!data || !currencyGetUnit) return;
-        const element = data.find(
-            (item: any) => item.pair.includes(currencyChangeUnit) && item.pair.includes(currencyGetUnit)
+        if (!currencies.length || !currencyGetUnit) return;
+        const currentCurrency = currencies.find(
+            (currency: ICurrencyData) => currency.pair.includes(currencyChangeUnit) && currency.pair.includes(currencyGetUnit)
         );
-        if (element) {
-            const currencies = element?.pair.split("/");
+        if (currentCurrency) {
+            const currencyPair = currentCurrency.pair.split("/");
             let result = 0;
-            if (currencies[0] === currencyChangeUnit) {
-                result = Number(currencyChangeValue) * Number(element.sale);
+            if (currencyPair[0] === currencyChangeUnit) {
+                result = Number(currencyChangeValue) * Number(currentCurrency.sale);
             } else {
-                result = Number(currencyChangeValue) / Number(element.buy);
+                result = Number(currencyChangeValue) / Number(currentCurrency.buy);
             }
             return setCurrencyValue(result.toFixed(2));
         }
-    }, [currencyChangeValue, currencyChangeUnit, currencyGetUnit, data]);
+    }, [currencyChangeValue, currencyChangeUnit, currencyGetUnit, currencies]);
 
     return (
         <Styled.ExchangeContainer>
@@ -53,7 +53,7 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
                     label={"Change"}
                     value={currencyChangeValue}
                     onChange={handleCurrencyChangeValue}
-                    data={data}
+                    data={currencies}
                     dropdownConfig={{
                         width: "100px",
                         height: "38px"
@@ -66,7 +66,7 @@ export const ExchangeCurrencyConverter: FC<{ data: ICurrencyData[] }> = ({ data 
                 />
                 <Styled.ChangeIcon data-testid="change-button" onClick={handleExchange} />
                 <ExchangeField
-                    data={data}
+                    data={currencies}
                     label={"Get"}
                     value={currencyValue}
                     dropdownValue={currencyGetUnit}
