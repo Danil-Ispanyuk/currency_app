@@ -51,11 +51,6 @@ export const ChangeIcon = styled(IconChange)`
     margin: 0 10px;
     margin-top: 30px;
     cursor: pointer;
-
-    @media (max-width: 985px) {
-        width: 40px;
-        margin: 30px 0;
-    }
 `;
 
 export const ErrorContainer = styled.div`
